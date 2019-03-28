@@ -327,12 +327,13 @@ public class UserService {
 
                 response.setStatus(201);
 
+                return "{ \n  \"password reset link\":\"http://csye6225-spring2019/reset?email="+user.getEmail()+"&token="+token+"\"\n}";
             } else {
                 response.setStatus(404);
                 return "{ \n  \"code\":\"404 Not Found.\",\n  \"reason\":\"The email you entered hasn't registered.\"\n}";
             }
 
-            return "http://example.com/reset?email="+user.getEmail()+"token="+token;
+
 
 
         } else {
