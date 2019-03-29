@@ -39,12 +39,7 @@ jobs:
             ls -al
             pwd
             ls -al
-            aws s3 sync lambda_artifact s3://lambda.csye6225-spring2019-${BUCKETNAME}.me --region us-east-1
+            aws s3 sync codedeploy_artifact s3://code-deploy.csye6225-spring2019-${BUCKETNAME}.me --region us-east-1
             echo "export RoleArn=$(aws iam list-roles --query 'Roles[?RoleName==`LambdaSNSRole`].Arn' --output text)" >> $BASH_ENV
 
-      - run:
-          name: create function
-          command: |
-            aws lambda create-function --function-name password-reset --runtime java8 --environment Variables={DOMAIN=${DOMAIN}} --memory-size 256 --role ${RoleArn} --handler Event:handeleRequest --code S3Bucket=lambda.csye6225-spring2019-${BUCKETNAME}.me,S3Key=csye6225-lambda-${CIRCLE_BUILD_NUM}.zip --region us-east-1
-	
 
