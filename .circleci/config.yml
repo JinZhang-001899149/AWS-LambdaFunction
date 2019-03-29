@@ -34,7 +34,8 @@ jobs:
           command: |
             pwd
             mkdir lambda_artifact
-            mv lambda-1.0-SNAPSHOT.jar lambda_artifact/
+          
+            mv lambda/target/lambda-1.0-SNAPSHOT.jar lambda_artifact/
             ls -al
             pwd
             ls -al
