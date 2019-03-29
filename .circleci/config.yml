@@ -19,7 +19,7 @@ jobs:
       - run:
           name: Scripts
           command: |
-            cd CloudWebApp
+            cd lambda
             pwd
             ls -al
             mvn clean package -DskipTests=true
@@ -34,12 +34,12 @@ jobs:
           command: |
             pwd
             mkdir lambda_artifact
-            zip -r csye6225-lambda-${CIRCLE_BUILD_NUM}.zip lambda/target/lambda-1.0-SNAPSHOT.jar
-            mv csye6225-lambda-${CIRCLE_BUILD_NUM}.zip lambda_artifact/
+            zip -r csye6225-aws-lambda-0.0.1.zip lambda/target/lambda-1.0-SNAPSHOT.jar
+            mv csye6225-aws-lambda-0.0.1.zip lambda_artifact/
             ls -al
             pwd
             ls -al
-            aws s3 sync codedeploy_artifact s3://code-deploy.csye6225-spring2019-${BUCKETNAME}.me --region us-east-1
+            aws s3 sync lambda_artifact s3://code-deploy.csye6225-spring2019-${BUCKETNAME}.me --region us-east-1
             echo "export RoleArn=$(aws iam list-roles --query 'Roles[?RoleName==`LambdaSNSRole`].Arn' --output text)" >> $BASH_ENV
 
 
