@@ -72,6 +72,15 @@
             <version>1.11.294</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>2.3</version>
+        </dependency>
+
+
+
+
     </dependencies>
 
 
