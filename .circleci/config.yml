@@ -19,7 +19,7 @@ jobs:
       - run:
           name: Scripts
           command: |
-            cd CloudWebApp
+            cd lambda
             pwd
             ls -al
             mvn clean package -DskipTests=true
