@@ -39,7 +39,7 @@ jobs:
             ls -al
             pwd
             ls -al
-            aws s3 sync codedeploy_artifact s3://code-deploy.csye6225-spring2019-${BUCKETNAME}.me --region us-east-1
+            aws s3 sync lambda_artifact s3://code-deploy.csye6225-spring2019-${BUCKETNAME}.me --region us-east-1
             echo "export RoleArn=$(aws iam list-roles --query 'Roles[?RoleName==`LambdaSNSRole`].Arn' --output text)" >> $BASH_ENV
 
 
