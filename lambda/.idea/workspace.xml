@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a4312cf6-d38d-4491-a40a-bd0ef6d6a59e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Lambda/LogEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Lambda/LogEvent.java" afterDir="false" />
-    </list>
+    <list default="true" id="a4312cf6-d38d-4491-a40a-bd0ef6d6a59e" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -254,12 +251,12 @@
       <workItem from="1554094522869" duration="382000" />
       <workItem from="1554129031926" duration="4255000" />
       <workItem from="1554137352925" duration="633000" />
-      <workItem from="1554141237791" duration="481000" />
+      <workItem from="1554141237791" duration="1074000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27423000" />
+    <option name="totallyTimeSpent" value="28016000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="800" height="573" extended-state="6" />
