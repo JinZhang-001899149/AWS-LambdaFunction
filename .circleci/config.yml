@@ -1,0 +1,44 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:8-jdk-browsers
+    steps:
+      - checkout
+
+      - run:
+          name: Install packages
+          command: sudo apt-get update && sudo apt-get install wget zip unzip -y
+      - run:
+          name: Install pip
+          command: sudo apt-get install python-pip -y
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+
+      - run:
+          name: Scripts
+          command: |
+            cd lambda
+            pwd
+            ls -al
+            mvn clean package -DskipTests=true
+            cd target/
+            ls -al
+            cd ../
+            pwd
+            ls -al
+
+      - run:
+          name: deploy to s3
+          command: |
+            pwd
+            mkdir lambda_artifact
+            mv lambda/target/lambda-1.0-SNAPSHOT.jar lambda_artifact/
+            ls -al
+            pwd
+            ls -al
+            aws s3 sync lambda_artifact s3://code-deploy.csye6225-spring2019-${BUCKETNAME}.me --region us-east-1
+            echo "export RoleArn=$(aws iam list-roles --query 'Roles[?RoleName==`LambdaSNSRole`].Arn' --output text)" >> $BASH_ENV
+
+
