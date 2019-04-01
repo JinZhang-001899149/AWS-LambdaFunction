@@ -34,7 +34,9 @@ jobs:
           command: |
             pwd
             mkdir lambda_artifact
-            mv lambda/target/lambda-1.0-SNAPSHOT.jar lambda_artifact/
+            zip -r csye6225-spring2019-lambda.zip lambda/target//lambda-1.0-SNAPSHOT.jar
+            aws lambda update-function-code --function-name lambdaFunction --region us-east-1 --zip-file fileb://lambda/target//csye6225-spring2019-lambda.zip
+            mv csye6225-spring2019-lambda.zip lambda_artifact/
             ls -al
             pwd
             ls -al
