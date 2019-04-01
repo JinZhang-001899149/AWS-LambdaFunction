@@ -75,17 +75,27 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
         this.initDynamoDbClient();
         Item existUser = this.dynamoDb.getTable(DYNAMODB_TABLE_NAME).getItem("Id", username);
 
+        Number expire = System.currentTimeMillis()/1000L+1200;
+        context.getLogger().log("Token will expire at the time "+expire);
+
         if (existUser == null) {
             this.dynamoDb.getTable(DYNAMODB_TABLE_NAME)
                     .putItem(
                             new PutItemSpec().withItem(new Item()
                                     .withString("Id", username)
                                     .withString("token", token)
-                                    .withLong("TTL", 1200)));
+                                    .withNumber("TTL",expire)));
+
             textBody = "https://csye6225-spring2019.com/reset?email=" + username + "&token=" + token;
             try {
                 AmazonSimpleEmailService client = AmazonSimpleEmailServiceClientBuilder.standard()
                         .withRegion(Regions.US_EAST_1).build();
+
+                HTMLBODY = "<h1>Csye 6225 Password reset link</h1>"
+                        + "<p>This email was sent with <a href='https://aws.amazon.com/ses/'>"
+                        + "Amazon SES</a> using the <a href='https://aws.amazon.com/sdk-for-java/'>"
+                        + "AWS SDK for Java</a>"
+                        + "<p>The password reset link is as below, it will expire after 20 minutes";
 
                 String body = HTMLBODY + "<p> " + textBody + "</p>";
                 SendEmailRequest emailRequest = new SendEmailRequest()
@@ -113,6 +123,13 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
             try {
                 AmazonSimpleEmailService client = AmazonSimpleEmailServiceClientBuilder.standard()
                         .withRegion(Regions.US_EAST_1).build();
+                context.getLogger().log("Text body: "+textBody);
+
+                HTMLBODY = "<h1>Csye 6225 Password reset link</h1>"
+                        + "<p>This email was sent with <a href='https://aws.amazon.com/ses/'>"
+                        + "Amazon SES</a> using the <a href='https://aws.amazon.com/sdk-for-java/'>"
+                        + "AWS SDK for Java</a>"
+                        + "<p>Please wait the link expire";
 
                 String body = HTMLBODY + "<p>Password reset link already sent</p>";
 
