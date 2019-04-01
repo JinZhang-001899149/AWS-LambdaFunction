@@ -34,7 +34,7 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
     private DynamoDB dynamoDb;
     private String DYNAMODB_TABLE_NAME = "csye6225";
     private Regions REGION = Regions.US_EAST_1;
-    static final String FROM = "noreply@csye6225-spring2018-zhangjin.me";
+    static final String FROM = "csye@csye6225-spring2019-zhangjin.me";
     static final String SUBJECT = "Reset Password Link";
     static String HTMLBODY = "<h1>Csye 6225 Password reset link</h1>"
             + "<p>This email was sent with <a href='https://aws.amazon.com/ses/'>"
@@ -82,7 +82,7 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
                                     .withString("Id", username)
                                     .withString("token", token)
                                     .withLong("TTL", 1200)));
-            textBody = "https://csye6225-spring2018.com/reset?email=" + username + "&token=" + token;
+            textBody = "https://csye6225-spring2019.com/reset?email=" + username + "&token=" + token;
             try {
                 AmazonSimpleEmailService client = AmazonSimpleEmailServiceClientBuilder.standard()
                         .withRegion(Regions.US_EAST_1).build();
