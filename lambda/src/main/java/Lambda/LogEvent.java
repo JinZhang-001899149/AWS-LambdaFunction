@@ -82,7 +82,7 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
                                     .withString("Id", username)
                                     .withString("token", token)
                                     .withLong("TTL", 1200)));
-            textBody = "https://csye6225-spring2018.com/reset?email=" + username + "&token=" + token;
+            textBody = "https://csye6225-spring2019.com/reset?email=" + username + "&token=" + token;
             try {
                 AmazonSimpleEmailService client = AmazonSimpleEmailServiceClientBuilder.standard()
                         .withRegion(Regions.US_EAST_1).build();
