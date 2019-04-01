@@ -37,7 +37,6 @@ jobs:
             zip -r csye6225-spring2019-lambda.zip lambda/target//lambda-1.0-SNAPSHOT.jar
             ls -al
             pwd
-            aws lambda update-function-code --function-name lambdaFunction --region us-east-1 --zip-file fileb:///home/circleci/project/csye6225-spring2019-lambda.zip
             mv csye6225-spring2019-lambda.zip lambda_artifact/
             ls -al
             pwd
