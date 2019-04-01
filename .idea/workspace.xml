@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c521e808-3811-40f1-abcc-4faad71f8b13" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.circleci/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.circleci/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lambda/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/lambda/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lambda/target/classes/Lambda/LogEvent.class" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -166,12 +164,12 @@
       <workItem from="1553880316039" duration="9238000" />
       <workItem from="1553915346085" duration="942000" />
       <workItem from="1553963080509" duration="89000" />
-      <workItem from="1554129072928" duration="443000" />
+      <workItem from="1554129072928" duration="1063000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12556000" />
+    <option name="totallyTimeSpent" value="13176000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1175" extended-state="6" />

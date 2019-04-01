@@ -39,8 +39,5 @@ jobs:
             pwd
             ls -al
             aws s3 sync lambda_artifact s3://code-deploy.csye6225-spring2019-${BUCKETNAME}.me --region us-east-1
-            echo "export RoleArn=$(aws iam list-roles --query 'Roles[?RoleName==`LambdaSNSRole`].Arn' --output text)" >> $BASH_ENV
-
-            aws lambda update-function-code --function-name csye6225lambda --region us-east-1 --zip-file fileb://lambda/target/lambda-1.0-SNAPSHOT.jar
 
 
