@@ -121,7 +121,7 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
             }
         } else {
 
-            if(existUser.getNumber("TTL").longValue()>System.currentTimeMillis()/1000L){
+            if(existUser.getNumber("TTL").longValue()<System.currentTimeMillis()/1000L){
                 existUser.with("TTL",System.currentTimeMillis()/1000L+1200);
                 existUser.with("token",UUID.randomUUID().toString());
 
