@@ -87,7 +87,7 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
                                     .withString("token", token)
                                     .withNumber("TTL",expire)));
 
-            textBody = "https://csye6225-spring2019.com/reset?email=" + username + "&token=" + token;
+            textBody = "https://"+System.getenv("DOMAIN")+"/reset?email=" + username + "&token=" + token;
             try {
                 AmazonSimpleEmailService client = AmazonSimpleEmailServiceClientBuilder.standard()
                         .withRegion(Regions.US_EAST_1).build();
@@ -125,7 +125,7 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
                 existUser.with("TTL",System.currentTimeMillis()/1000L+1200);
                 existUser.with("token",UUID.randomUUID().toString());
 
-                textBody = "https://csye6225-spring2019.com/reset?email=" + username + "&token=" + token;
+                textBody = "https://"+System.getenv("DOMAIN")+"/reset?email=" + username + "&token=" + token;
                 try {
                     AmazonSimpleEmailService client = AmazonSimpleEmailServiceClientBuilder.standard()
                             .withRegion(Regions.US_EAST_1).build();
@@ -157,7 +157,7 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
                     System.out.println("The email was not sent. Error message: "
                             + ex.getMessage());
                 }
-            }else {
+            }/*else {
 
                 try {
                     AmazonSimpleEmailService client = AmazonSimpleEmailServiceClientBuilder.standard()
@@ -191,7 +191,7 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
                     System.out.println("The email was not sent. Error message: "
                             + ex.getMessage());
                 }
-            }
+            }*/
         }
 
         return null;
