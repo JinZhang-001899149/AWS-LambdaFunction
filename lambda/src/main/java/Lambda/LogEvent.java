@@ -75,8 +75,8 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
         this.initDynamoDbClient();
         Item existUser = this.dynamoDb.getTable(DYNAMODB_TABLE_NAME).getItem("Id", username);
 
-        //Number expire = System.currentTimeMillis()/1000L+1200;
-        Number expire = 1200;
+        Number expire = System.currentTimeMillis()/1000L+1200;
+        //Number expire = 1200;
         context.getLogger().log("Token will expire at the time "+expire);
 
         if (existUser == null) {
