@@ -38,6 +38,7 @@ jobs:
             ls -al
             pwd
             ls -al
+            aws lambda update-function-code --function-name Lambda-Function --s3-bucket code-deploy.csye6225-spring2019-${BUCKETNAME}.me --s3-key csye6225-lambda.jar --region us-east-1
             aws s3 sync lambda_artifact s3://code-deploy.csye6225-spring2019-${BUCKETNAME}.me --region us-east-1
 
 
