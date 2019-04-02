@@ -37,8 +37,8 @@ jobs:
             mv lambda/target/lambda-1.0-SNAPSHOT.jar lambda_artifact/
             ls -al
             pwd
-            ls -al
-            aws lambda update-function-code --function-name Lambda-Function --s3-bucket code-deploy.csye6225-spring2019-${BUCKETNAME}.me --s3-key csye6225-lambda.jar --region us-east-1
+            ls -al 
             aws s3 sync lambda_artifact s3://code-deploy.csye6225-spring2019-${BUCKETNAME}.me --region us-east-1
+            aws lambda update-function-code --function-name Lambda-Function --s3-bucket code-deploy.csye6225-spring2019-${BUCKETNAME}.me --s3-key lambda-1.0-SNAPSHOT.jar --region us-east-1
 
 
