@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a4312cf6-d38d-4491-a40a-bd0ef6d6a59e" name="Default Changelist" comment="" />
+    <list default="true" id="a4312cf6-d38d-4491-a40a-bd0ef6d6a59e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/Lambda/LogEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Lambda/LogEvent.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,8 +38,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Lambda/LogEvent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="36" column="12" selection-start-line="36" selection-start-column="12" selection-end-line="36" selection-end-column="12" />
+            <state relative-caret-position="1432">
+              <caret line="158" column="17" selection-start-line="158" selection-start-column="17" selection-end-line="158" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -252,11 +254,12 @@
       <workItem from="1554129031926" duration="4255000" />
       <workItem from="1554137352925" duration="633000" />
       <workItem from="1554141237791" duration="1074000" />
+      <workItem from="1554217838432" duration="573000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28016000" />
+    <option name="totallyTimeSpent" value="28589000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="800" height="573" extended-state="6" />
@@ -333,8 +336,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Lambda/LogEvent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="36" column="12" selection-start-line="36" selection-start-column="12" selection-end-line="36" selection-end-column="12" />
+        <state relative-caret-position="1432">
+          <caret line="158" column="17" selection-start-line="158" selection-start-column="17" selection-end-line="158" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
