@@ -75,8 +75,8 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
         this.initDynamoDbClient();
         Item existUser = this.dynamoDb.getTable(DYNAMODB_TABLE_NAME).getItem("Id", username);
 
-        //Number expire = System.currentTimeMillis()/1000L+1200;
-        Number expire = 1200;
+        Number expire = System.currentTimeMillis()/1000L+1200;
+        //Number expire = 1200;
         context.getLogger().log("Token will expire at the time "+expire);
 
         if (existUser == null) {
@@ -87,7 +87,7 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
                                     .withString("token", token)
                                     .withNumber("TTL",expire)));
 
-            textBody = "https://csye6225-spring2019.com/reset?email=" + username + "&token=" + token;
+            textBody = "https://"+System.getenv("DOMAIN")+"/reset?email=" + username + "&token=" + token;
             try {
                 AmazonSimpleEmailService client = AmazonSimpleEmailServiceClientBuilder.standard()
                         .withRegion(Regions.US_EAST_1).build();
@@ -121,38 +121,77 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
             }
         } else {
 
-            try {
-                AmazonSimpleEmailService client = AmazonSimpleEmailServiceClientBuilder.standard()
-                        .withRegion(Regions.US_EAST_1).build();
-                context.getLogger().log("Text body: "+textBody);
+            if(existUser.getNumber("TTL").longValue()<System.currentTimeMillis()/1000L){
+                existUser.with("TTL",System.currentTimeMillis()/1000L+1200);
+                existUser.with("token",UUID.randomUUID().toString());
 
-                HTMLBODY = "<h1>Csye 6225 Password reset link</h1>"
-                        + "<p>This email was sent with <a href='https://aws.amazon.com/ses/'>"
-                        + "Amazon SES</a> using the <a href='https://aws.amazon.com/sdk-for-java/'>"
-                        + "AWS SDK for Java</a>"
-                        + "<p>Please wait the link expire";
+                textBody = "https://"+System.getenv("DOMAIN")+"/reset?email=" + username + "&token=" + token;
+                try {
+                    AmazonSimpleEmailService client = AmazonSimpleEmailServiceClientBuilder.standard()
+                            .withRegion(Regions.US_EAST_1).build();
 
-                String body = HTMLBODY + "<p>Password reset link already sent</p>";
+                    HTMLBODY = "<h1>Csye 6225 Password reset link</h1>"
+                            + "<p>This email was sent with <a href='https://aws.amazon.com/ses/'>"
+                            + "Amazon SES</a> using the <a href='https://aws.amazon.com/sdk-for-java/'>"
+                            + "AWS SDK for Java</a>"
+                            + "<p>The password reset link is as below, it will expire after 20 minutes";
 
-                SendEmailRequest emailRequest = new SendEmailRequest()
-                        .withDestination(
-                                new Destination().withToAddresses(username))
-                        .withMessage(new Message()
-                                .withBody(new Body()
-                                        .withHtml(new Content()
-                                                .withCharset("UTF-8").withData(body))
-                                )
-                                .withSubject(new Content()
-                                        .withCharset("UTF-8").withData(SUBJECT)))
-                        .withSource(FROM);
-                client.sendEmail(emailRequest);
+                    String body = HTMLBODY + "<p> " + textBody + "</p>";
+                    SendEmailRequest emailRequest = new SendEmailRequest()
+                            .withDestination(
+                                    new Destination().withToAddresses(username))
+                            .withMessage(new Message()
+                                    .withBody(new Body()
+                                            .withHtml(new Content()
+                                                    .withCharset("UTF-8").withData(body))
+                                            .withText(new Content()
+                                                    .withCharset("UTF-8").withData(textBody)))
+                                    .withSubject(new Content()
+                                            .withCharset("UTF-8").withData(SUBJECT)))
+                            .withSource(FROM);
+                    client.sendEmail(emailRequest);
 
 
-                System.out.println("Email sent successfully!");
-            } catch (Exception ex) {
-                System.out.println("The email was not sent. Error message: "
-                        + ex.getMessage());
-            }
+                    System.out.println("Email sent successfully!");
+                } catch (Exception ex) {
+                    System.out.println("The email was not sent. Error message: "
+                            + ex.getMessage());
+                }
+            }/*else {
+
+                try {
+                    AmazonSimpleEmailService client = AmazonSimpleEmailServiceClientBuilder.standard()
+                            .withRegion(Regions.US_EAST_1).build();
+                    context.getLogger().log("Text body: " + textBody);
+
+                    HTMLBODY = "<h1>Csye 6225 Password reset link</h1>"
+                            + "<p>This email was sent with <a href='https://aws.amazon.com/ses/'>"
+                            + "Amazon SES</a> using the <a href='https://aws.amazon.com/sdk-for-java/'>"
+                            + "AWS SDK for Java</a>"
+                            + "<p>Please wait the link expire";
+
+                    String body = HTMLBODY + "<p>Password reset link already sent</p>";
+
+                    SendEmailRequest emailRequest = new SendEmailRequest()
+                            .withDestination(
+                                    new Destination().withToAddresses(username))
+                            .withMessage(new Message()
+                                    .withBody(new Body()
+                                            .withHtml(new Content()
+                                                    .withCharset("UTF-8").withData(body))
+                                    )
+                                    .withSubject(new Content()
+                                            .withCharset("UTF-8").withData(SUBJECT)))
+                            .withSource(FROM);
+                    client.sendEmail(emailRequest);
+
+
+                    System.out.println("Email sent successfully!");
+                } catch (Exception ex) {
+                    System.out.println("The email was not sent. Error message: "
+                            + ex.getMessage());
+                }
+            }*/
         }
 
         return null;
