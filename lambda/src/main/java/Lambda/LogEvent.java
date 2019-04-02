@@ -34,7 +34,7 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
     private DynamoDB dynamoDb;
     private String DYNAMODB_TABLE_NAME = "csye6225";
     private Regions REGION = Regions.US_EAST_1;
-    static final String FROM = "csye@csye6225-spring2019-zhangjin.me";
+    private static String FROM = "csye@"+System.getenv("DOMAIN");
     static final String SUBJECT = "Reset Password Link";
     static String HTMLBODY = "<h1>Csye 6225 Password reset link</h1>"
             + "<p>This email was sent with <a href='https://aws.amazon.com/ses/'>"
